@@ -1,0 +1,358 @@
+/* Custom Properties (Variables) */
+:root {
+    --primary-color: #4CAF50; /* Soothing Green - inspired by nature, health */
+    --secondary-color: #6A1B9A; /* Deep Purple - spirituality, wisdom */
+    --accent-color: #FFC107; /* Golden Yellow - warmth, enlightenment */
+    --text-dark: #333;
+    --text-light: #f4f4f4;
+    --bg-light: #fefefe;
+    --bg-section: #fff0f5; /* A soft, gentle pinkish hue for the section background */
+    --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --border-radius-lg: 15px;
+    --transition-speed: 0.3s ease-in-out;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 4em;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+h2 {
+    font-size: 3em;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+h3 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.section-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Header/Hero Section for Women's Care Page */
+.hero-section-women {
+    background: linear-gradient(rgba(255, 192, 203, 0.7), rgba(106, 27, 154, 0.7)), url('images/hero_women_care_bg.jpg') no-repeat center center/cover;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    color: var(--text-light);
+    position: relative;
+    z-index: 1;
+}
+.hero-section-women::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
+    z-index: -1;
+}
+
+.hero-section-women h1 {
+    font-size: 4.2em;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    color: var(--text-light);
+}
+
+.hero-section-women p {
+    font-size: 1.6em;
+    opacity: 0.9;
+    font-weight: 300;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    color: var(--text-light);
+}
+
+
+/* Main Women Care Section */
+.women-care-section {
+    background-color: var(--bg-section); /* Soft background color */
+    padding: 80px 0;
+}
+
+.care-tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.care-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.care-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.icon-bubble {
+    background-color: var(--secondary-color); /* Purple bubble */
+    color: var(--white);
+    font-size: 2.8em;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 3px solid var(--accent-color); /* Gold border */
+}
+
+.care-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-color); /* Green heading */
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.care-card p {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Promotional Section within Women Care */
+.women-care-promo {
+    display: flex;
+    flex-direction: row; /* Default for larger screens */
+    align-items: center;
+    background: linear-gradient(to right, #ffe6f2, #ffe0f0); /* Soft pink gradient */
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    margin-top: 60px;
+    padding: 30px;
+}
+
+.women-care-promo .promo-image {
+    max-width: 40%; /* Image takes 40% width */
+    height: auto;
+    border-radius: 10px;
+    margin-right: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.women-care-promo .promo-content {
+    flex-grow: 1; /* Content takes remaining space */
+    padding: 20px 0;
+}
+
+.women-care-promo h3 {
+    font-size: 2.5em;
+    color: var(--secondary-color); /* Purple heading */
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.women-care-promo p {
+    font-size: 1.2em;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+
+.btn-secondary-care {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background-color var(--transition-speed), transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary-care:hover {
+    background-color: #388e3c; /* Darker green */
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.95em;
+}
+
+footer .social-links a {
+    color: var(--text-light);
+    font-size: 1.6em;
+    margin: 0 12px;
+    transition: color var(--transition-speed);
+}
+
+footer .social-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-section-women h1 {
+        font-size: 3.5em;
+    }
+    .hero-section-women p {
+        font-size: 1.4em;
+    }
+    .women-care-section {
+        padding: 60px 0;
+    }
+    .women-care-promo {
+        flex-direction: column; /* Stack image and content */
+        padding: 25px;
+        text-align: center;
+    }
+    .women-care-promo .promo-image {
+        max-width: 80%; /* Image takes more width when stacked */
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+    .women-care-promo h3 {
+        font-size: 2em;
+    }
+    .women-care-promo p {
+        font-size: 1.1em;
+    }
+    .care-tips-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section-women h1 {
+        font-size: 2.8em;
+    }
+    .hero-section-women p {
+        font-size: 1.2em;
+    }
+    h2 {
+        font-size: 2em;
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
+    .women-care-section .section-description {
+        font-size: 1.1em;
+        margin-bottom: 40px;
+    }
+    .care-tips-grid {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
+    .care-card {
+        padding: 25px;
+    }
+    .icon-bubble {
+        width: 70px;
+        height: 70px;
+        font-size: 2.2em;
+    }
+    .care-card h3 {
+        font-size: 1.5em;
+    }
+    .btn-secondary-care {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section-women h1 {
+        font-size: 2.2em;
+    }
+    .hero-section-women p {
+        font-size: 1em;
+    }
+    h2 {
+        font-size: 1.7em;
+    }
+    .women-care-section .section-description {
+        font-size: 1em;
+    }
+    .women-care-promo .promo-image {
+        max-width: 100%;
+    }
+}

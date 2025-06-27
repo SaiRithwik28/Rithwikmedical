@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .cart-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        .cart-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        .cart-summary {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .pay-button {
+            display: block;
+            margin: 30px auto;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .pay-button:hover {
+            background-color: #218838;
+        }
+        .remove-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .remove-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cart-container">
+    <h2>Your Shopping Cart</h2>
+    <div id="cartItems"></div>
+    <div class="cart-summary" id="totalAmount"></div>
+    <button class="pay-button" onclick="sendPaymentRequest()">Send Payment Request</button>
+</div>
+
+<script>
+    let cartData = JSON.parse(localStorage.getItem('cart')) || [];
+    const container = document.getElementById('cartItems');
+    const totalElement = document.getElementById('totalAmount');
+
+    function renderCart() {
+        container.innerHTML = '';
+        let total = 0;
+
+        cartData.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'cart-item';
+
+            const image = document.createElement('img');
+            image.src = item.image || 'https://via.placeholder.com/100';
+
+            const details = document.createElement('div');
+            details.className = 'cart-item-details';
+            details.innerHTML = `<strong>${item.name}</strong><br>Price: ₹${item.price.toFixed(2)}`;
+
+            const removeBtn = document.createElement('button');
+            removeBtn.innerText = 'Remove';
+            removeBtn.className = 'remove-button';
+            removeBtn.onclick = () => removeItem(index);
+
+            div.appendChild(image);
+            div.appendChild(details);
+            div.appendChild(removeBtn);
+            container.appendChild(div);
+
+            total += item.price;
+        });
+
+        totalElement.innerText = `Total Amount: ₹${total.toFixed(2)}`;
+    }
+
+    function removeItem(index) {
+        cartData.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cartData));
+        renderCart();
+    }
+
+    function sendPaymentRequest() {
+        const email = localStorage.getItem('userEmail');
+        if (!email) return alert('No user email found in localStorage.');
+
+        const total = cartData.reduce((sum, item) => sum + item.price, 0);
+
+        alert(`Payment request sent to ${email} for ₹${total.toFixed(2)}`);
+        // Integrate with backend or email API here.
+    }
+
+    renderCart();
+</script>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBNSpayhzItGiJB4llF93ICW_jIgrvgPak",
+    authDomain: "medicine-delivery-130aa.firebaseapp.com",
+    projectId: "medicine-delivery-130aa",
+    storageBucket: "medicine-delivery-130aa.firebasestorage.app",
+    messagingSenderId: "539898474363",
+    appId: "1:539898474363:web:2debf03eb6a2f33e65d7de",
+    measurementId: "G-H3RBF4GRNX"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+</body>
+</html>

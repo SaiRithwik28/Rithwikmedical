@@ -1,0 +1,598 @@
+/* ============ BASE STYLES ============ */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #212121;
+    line-height: 1.5;
+    /* --- ADDED SUBTLE BACKGROUND --- */
+    background-color: #f8f9fa; /* A very light grey/off-white for a clean, modern look */
+    background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png'); /* Very subtle dotted pattern */
+    background-repeat: repeat; /* Ensures the pattern repeats across the entire background */
+    background-position: top left; /* Default for repeating patterns */
+    background-size: auto; /* Let the pattern repeat at its natural size */
+    background-attachment: fixed; /* Keeps background fixed when scrolling */
+}
+
+/* ============ NAVBAR ============ */
+.navbar {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #1a504c;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.gif { /* Assuming you meant 'gif' for the logo from index.html for consistency */
+    width: 80px;
+    height: 70px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.gif:hover {
+    transform: scale(1.05);
+}
+
+/* ============ SEARCH BAR ============ */
+.searchbar {
+    width: 600px;
+    max-width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    height: 40px;
+    padding: 10px;
+    font-family: Arial;
+    transition: box-shadow 0.3s ease;
+}
+
+.searchbar:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(26, 80, 76, 0.3);
+}
+
+.magnifying {
+    height: 40px;
+    width: 50px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.magnifying:hover {
+    background-color: #f5f5f5;
+}
+
+/* ============ NAV ITEMS ============ */
+.smallCards {
+    height: 50px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.smallCards:hover {
+    transform: translateY(-2px);
+}
+
+#loginlogo {
+    font-size: 20px;
+    color: greenyellow;
+}
+
+.login-section { /* Added from homepage styles for consistency */
+    display: flex;
+    align-items: center;
+}
+
+.login {
+    font-family: Arial;
+    color: azure;
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+.downlist {
+    font-family: Arial;
+    font-size: 15px;
+    color: azure;
+    padding: 8px 12px;
+    transition: color 0.3s ease;
+    text-decoration: none; /* Ensure links don't have underlines */
+}
+
+.downlist:hover {
+    color: greenyellow;
+}
+
+/* ============ CATEGORY CARDS (from homepage for consistency) ============ */
+.categoryCard {
+    height: 300px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.browsebyconditions {
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19px;
+    margin: 20px 0 16px 20px;
+    color: #1a504c;
+}
+
+.sectioncontainer {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap; /* Added for responsiveness */
+    justify-content: center; /* Center items */
+    gap: 15px; /* Spacing between cards */
+}
+
+.cards {
+    height: 90px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    background: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Softer shadow */
+}
+
+.cards:hover {
+    transform: translateY(-3px); /* Consistent with homepage */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+#card_icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-left: 10px; /* Added margin for icon */
+}
+
+.card_description {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #3a3a3a;
+    margin-left: 12px;
+}
+
+/* ============ BRAND STYLES (from homepage for consistency) ============ */
+.brandContainer {
+    height: 100px; /* Adjusted to match homepage brandContainer */
+    width: 100px; /* Adjusted to match homepage brandContainer */
+    border-radius: 50%; /* Circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    overflow: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.brandContainer:hover {
+    transform: scale(1.05);
+}
+
+.brandImage {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.brandName {
+    font-family: 'Open Sans', sans-serif; /* Consistent with homepage */
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #444;
+    text-align: center;
+    margin-top: 8px;
+    transition: color 0.3s ease;
+}
+
+.brand-item:hover .brandName {
+    color: #3f51b5; /* Matches homepage primary heading color on hover */
+}
+.brand-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.brand-item:hover {
+    background-color: #e6f0fa;
+    transform: translateY(-2px);
+}
+
+/* ============ PRODUCT CARDS ============ */
+
+/* Styles for .instantRelief now applied to make it look attractive and medium-sized */
+.instantRelief {
+    font-family: 'Open Sans', sans-serif; /* Clean sans-serif, complements Lora */
+    font-size: 1.8em; /* Medium size */
+    font-weight: 600; /* Semi-bold */
+    color: #555; /* Soft dark grey */
+    text-align: center;
+    margin-top: 45px;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid #cccccc; /* Very subtle single underline */
+}
+
+.instantRelief::after {
+    content: '';
+    display: none; /* Ensure no secondary line */
+}
+
+
+.instantReliefContainer {
+    width: 100%;
+    min-height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.miniCards {
+    height: 320px;
+    width: 100%;
+    border-radius: 12px; /* Consistent with homepage */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0; /* Consistent with homepage */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Consistent with homepage */
+    box-sizing: border-box;
+    padding-bottom: 15px; /* Consistent with homepage */
+}
+
+.miniCards:hover {
+    transform: translateY(-3px); /* Consistent with homepage */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Consistent with homepage */
+}
+
+.miniCardsImages {
+    width: 140px; /* Consistent with homepage */
+    height: 120px; /* Consistent with homepage */
+    object-fit: contain;
+    margin-top: 15px;
+}
+
+.miniCardsDescription {
+    color: #555; /* Consistent with homepage */
+    font-family: 'Open Sans', sans-serif; /* Consistent with homepage */
+    font-weight: 400; /* Consistent with homepage */
+    font-size: 0.95em; /* Consistent with homepage */
+    text-align: center;
+    padding: 0 10px;
+    margin: 10px 0;
+    min-height: 60px; /* Consistent with homepage */
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Consistent with homepage */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    flex-grow: 1; /* Consistent with homepage */
+}
+
+/* Price section alignment for dynamic cards */
+.price-section { /* Added from homepage for better layout */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline; /* Aligns elements at their text baselines */
+    margin-top: auto; /* Pushes the price section to the bottom */
+    padding: 0 10px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 8px; /* Slight increase for better spacing to button */
+}
+
+.price {
+    font-family: 'Open Sans', sans-serif; /* Consistent with homepage */
+    font-size: 1.1em; /* Consistent with homepage */
+    font-weight: 600; /* Consistent with homepage */
+    color: #1a504c;
+    margin-right: 8px;
+    white-space: nowrap;
+    display: flex; /* Use flexbox for inner price elements */
+    align-items: center; /* Vertically align items in the price line */
+}
+
+.rupeesign {
+    font-size: 0.9em !important; /* Consistent with homepage */
+    margin-right: 2px !important; /* Consistent with homepage */
+    display: inline-block !important; /* Consistent with homepage */
+    vertical-align: middle !important; /* Consistent with homepage */
+    color: #1a504c !important; /* Consistent with homepage */
+}
+
+.mrp {
+    font-family: 'Open Sans', sans-serif; /* Consistent with homepage */
+    font-size: 0.8em; /* Consistent with homepage */
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 2px;
+    white-space: nowrap;
+}
+
+.discount {
+    font-family: 'Open Sans', sans-serif; /* Consistent with homepage */
+    font-size: 0.75em; /* Consistent with homepage */
+    color: #28a745;
+    font-weight: 500;
+    margin-left: 8px;
+    white-space: nowrap;
+}
+
+.addButton {
+    height: 38px; /* Consistent with homepage */
+    width: calc(100% - 30px); /* Consistent with homepage */
+    background-color: #165D59;
+    color: azure;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif; /* Consistent with homepage */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto; /* Push to bottom of flex container */
+    margin-bottom: 0px; /* Consistent with homepage */
+    font-size: 0.95em; /* Consistent with homepage */
+}
+
+.addButton:hover {
+    background-color: #1a504c;
+    transform: translateY(-1px); /* Consistent with homepage */
+}
+
+/* ============ RESPONSIVE ADJUSTMENTS ============ */
+@media (max-width: 1200px) {
+    .searchbar {
+        width: 400px;
+    }
+}
+
+@media (max-width: 992px) {
+    .searchbar {
+        width: 300px;
+    }
+    
+    .cards {
+        width: 180px;
+    }
+
+    /* Responsive adjustments for .instantRelief heading */
+    .instantRelief {
+        font-size: 1.5em;
+        margin-top: 40px;
+        margin-bottom: 25px;
+    }
+
+    .miniCards {
+        height: 300px;
+    }
+    .miniCardsImages {
+        width: 120px;
+        height: 100px;
+    }
+    .miniCardsDescription {
+        font-size: 0.9em;
+        min-height: 55px;
+        -webkit-line-clamp: 3;
+    }
+    .price {
+        font-size: 1em;
+    }
+    .mrp {
+        font-size: 0.75em;
+    }
+    .discount {
+        font-size: 0.7em;
+    }
+    .addButton {
+        height: 35px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 768px) {
+    .searchbar {
+        width: 200px;
+    }
+    
+    .downlist {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Responsive adjustments for .instantRelief heading */
+    .instantRelief {
+        font-size: 1.3em;
+        margin-top: 35px;
+        margin-bottom: 20px;
+    }
+    
+    .miniCards {
+        height: 280px;
+        border-radius: 10px;
+    }
+    .miniCardsImages {
+        width: 100px;
+        height: 90px;
+    }
+    .miniCardsDescription {
+        font-size: 0.85em;
+        min-height: 50px;
+        -webkit-line-clamp: 3;
+    }
+    .price {
+        font-size: 0.9em;
+    }
+    .mrp {
+        font-size: 0.70em;
+    }
+    .discount {
+        font-size: 0.65em;
+    }
+    .addButton {
+        height: 32px;
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 576px) {
+    .gif { /* Changed from .logo to .gif */
+        width: 60px;
+        height: 50px;
+    }
+    
+    .searchbar {
+        width: 150px;
+        font-size: 14px;
+    }
+    
+    .magnifying {
+        width: 40px;
+    }
+    
+    .smallCards {
+        width: 60px;
+    }
+    
+    .login {
+        font-size: 14px;
+    }
+
+    /* Responsive adjustments for .instantRelief heading */
+    .instantRelief {
+        font-size: 1.1em;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+    
+    .miniCards {
+        height: 260px;
+        border-radius: 8px;
+    }
+    .miniCardsImages {
+        width: 80px;
+        height: 70px;
+    }
+    .miniCardsDescription {
+        font-size: 0.8em;
+        min-height: 45px;
+        -webkit-line-clamp: 3;
+    }
+    .price {
+        font-size: 0.85em;
+    }
+    .mrp {
+        font-size: 0.65em;
+    }
+    .discount {
+        font-size: 0.60em;
+    }
+    .addButton {
+        height: 30px;
+        font-size: 0.8em;
+    }
+}
+/* --- Enhanced Back to Home Button Style - Option 1: Soft Blue-Green Gradient --- */
+.back-to-home-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 25px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    /* Attractive Gradient Background: Soft Blue to Green */
+    background: linear-gradient(135deg, #6DD5ED 0%, #2193B0 100%); /* Light Sky Blue to Darker Blue */
+    /* Alternative blue-green: background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); */
+
+    color: #ffffff; /* Pure white text for contrast */
+    border: none;
+    border-radius: 30px; /* Pill-like shape */
+
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25); /* Slightly stronger shadow */
+    transition: all 0.3s ease-in-out;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); /* Subtle text shadow */
+}
+
+.back-to-home-btn:hover {
+    /* Slightly darker/more vibrant gradient on hover */
+    background: linear-gradient(135deg, #2193B0 0%, #6DD5ED 100%); /* Reverse direction or darker shade */
+    transform: translateY(-4px); /* More pronounced lift */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); /* Deeper shadow on hover */
+    color: #ffffff;
+}
+
+.back-to-home-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.back-to-home-btn i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.back-to-home-btn:hover i {
+    transform: translateX(-4px); /* More pronounced icon movement */
+}
+
+/* Ensure responsiveness still applies */
+@media (max-width: 576px) {
+    .back-to-home-btn {
+        width: 100%;
+        justify-content: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 0.95rem;
+        padding: 10px 20px;
+        border-radius: 25px;
+    }
+    .back-to-home-btn i {
+        margin-right: 8px;
+        font-size: 1.1rem;
+    }
+}

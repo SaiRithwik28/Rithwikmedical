@@ -1,0 +1,715 @@
+/* ===== Global Reset & Base Styles ===== */
+:root {
+  /* Keeping your original color variables for consistency where applicable */
+  --primary-color: #1a504c;
+  --secondary-color: #165d59;
+  --accent-color: greenyellow;
+  --text-light: azure;
+  --text-dark: #212121;
+  --text-gray: #3a3a3a;
+  
+  /* Updating shadow and border-radius to match your new explicit values or remove if no longer needed */
+  --shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  --border-radius-sm: 5px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 15px;
+}
+
+body {
+  margin: 0;
+  color: var(--text-dark);
+  font-family: 'Open Sans', sans-serif; /* A clean and highly readable font */
+  line-height: 1.6; /* Improved line height for readability */
+  background-color: #f8f9fa; /* A very light grey/off-white for a clean, modern look */
+  background-image: url('https://www.transparenttextures.com/patterns/clean-gray-paper.png'); /* Very subtle dotted pattern */
+  background-repeat: repeat; /* Ensures the pattern repeats across the entire background */
+  background-position: top left; /* Default for repeating patterns */
+  background-size: auto; /* Let the pattern repeat at its natural size */
+  background-attachment: fixed; /* Keeps background fixed when scrolling */
+}
+
+/* --- NEW/UPDATED NAVBAR RULES --- */
+.navbar {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #1a504c;
+    padding: 0.5rem 2rem; /* Keep padding for spacing */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    position: sticky; /* Make navbar sticky */
+    top: 0;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+/* --- NEW/UPDATED LOGO RULES --- */
+.main-logo { /* Renamed from .logo to .main-logo to match HTML */
+    width: 80px;
+    height: 70px;
+    /* background-color: #1a504c; /* Usually logos don't have a background-color unless they are solid blocks */
+    object-fit: contain; /* Ensure logo image scales correctly */
+    transition: transform 0.3s ease, filter 0.3s ease; /* Keep hover effect */
+    margin-right: 10px; /* Space between logo and text */
+}
+
+.main-logo:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    filter: brightness(1.1); /* Make it a bit brighter on hover */
+}
+
+.navbar-brand .logo-text {
+    font-family: 'Lora', serif; /* Elegant font for Ayurvedic theme */
+    font-size: 2.2em; /* Prominent size for website name */
+    font-weight: 700; /* Bold */
+    color: #E0FFE0; /* A soft, calming green/white that contrasts with primary-color */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4); /* Subtle shadow for depth */
+    white-space: nowrap; /* Keep text on one line */
+}
+
+/* --- NEW/UPDATED SEARCHBAR RULES --- */
+.search-container {
+  display: flex;
+  flex-grow: 1;
+  max-width: 600px; /* Kept max-width for better control */
+}
+
+.searchbar {
+    width: 600px; /* This will override `max-width` in larger screens if not careful. Consider `width: 100%;` with `max-width` on parent. */
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid; /* Added style as border:border-box is invalid */
+    border-color: #ddd; /* Example color, your original didn't specify */
+    height: 40px;
+    font-family: "Arial";
+    padding: 10px;
+    outline: none; /* Removed default focus outline */
+    transition: border-color 0.3s; /* Kept transition */
+}
+
+.searchbar:focus {
+  border-color: var(--primary-color); /* Keep focus style */
+}
+
+/* --- NEW/UPDATED MAGNIFYING GLASS RULES --- */
+.magnifying {
+    height: 40px;
+    width: 50px;
+    justify-content: center;
+    background-color: white;
+    border-radius: 5px;
+    border-width: 1px;
+    display: flex;
+    align-items: center; /* Added to center content vertically */
+    border: 1px solid #ddd; /* Added full border to match searchbar */
+    border-left: none; /* Keep border-left none for merged look */
+    cursor: pointer;
+}
+
+.magnifying:hover {
+  background-color: #f5f5f5; /* Keep hover style */
+}
+
+/* Login & Dropdown */
+.login-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+/* --- NEW/UPDATED LOGIN LOGO RULES --- */
+#loginlogo {
+    font-size: 20px;
+    color: greenyellow;
+}
+
+/* --- NEW/UPDATED LOGIN TEXT RULES --- */
+.login {
+    font-family: "Arial";
+    color: azure;
+    font-size: 16px;
+    display: flex; /* Keeping display flex from your rule */
+    align-items: center; /* Align text with icon */
+}
+
+/* --- NEW/UPDATED DOWNLIST RULES --- */
+.downlist {
+    font-family: "Arial";
+    font-size: 15px;
+    color: azure;
+    /* Added some padding to make them clickable areas more easily */
+    padding: 5px 10px; 
+    text-decoration: none; /* Remove underline for links */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.downlist:hover {
+    color: var(--accent-color); /* Change color on hover */
+}
+
+
+/* --- NEW/UPDATED CATEGORY CARD RULES --- */
+.categoryCard {
+    height: 300px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #fff; /* Added background for clarity */
+    border-radius: var(--border-radius-md); /* Apply existing variable */
+    padding: 1rem; /* Add padding inside the card */
+    box-sizing: border-box; /* Include padding in height/width */
+    margin-bottom: 20px; /* Add margin below for spacing */
+}
+
+/* --- NEW/UPDATED BROWSE BY CONDITIONS HEADING RULES --- */
+.browsebyconditions { /* This class is now used for section-heading-primary */
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 19px;
+    margin-bottom: 16px;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: var(--text-dark); /* Ensure text is visible */
+    /* Remove previous primary heading styles if this is the new primary style */
+    text-align: left; /* Default alignment */
+    position: relative;
+    padding-bottom: 5px; /* Adjust padding if needed for an underline */
+}
+/* If this is meant to be the *only* style for browsebyconditions,
+   you might want to remove the .section-heading-primary specific styles.
+   For now, I'm letting this one take precedence if it's applied directly. */
+.section-heading-primary { /* Keeping the original primary heading structure */
+    font-family: 'Lora', serif; /* A beautiful, elegant serif font */
+    font-size: 2.2em; /* Medium size */
+    font-weight: 700; /* Bold, but not overpowering */
+    color: #3f51b5; /* A sophisticated, calming blue (Indigo-like) */
+    text-align: center;
+    margin-top: 60px; /* Reduced margin */
+    margin-bottom: 40px; /* Reduced margin */
+    position: relative;
+    padding-bottom: 18px; /* Space for underline */
+    letter-spacing: 0.03em; /* Subtle letter spacing */
+    text-transform: capitalize; /* Capitalize each word for elegance */
+    border-bottom: 2px solid #a7d9e2; /* Soft blue underline */
+}
+.section-heading-primary::after {
+    content: '';
+    display: block;
+    width: 80px; /* Shorter secondary underline */
+    height: 1px; /* Very thin secondary line */
+    background-color: #8bc34a; /* A soft green for a natural, healthy feel */
+    margin: 6px auto 0;
+    border-radius: 0.5px;
+}
+
+
+.sectioncontainer {
+  display: flex;
+  width: 100%; /* Your rule */
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 1.5rem; /* Space between items */
+  padding: 0 1.25rem; /* Padding for the container */
+  overflow-x: auto; /* Allows horizontal scrolling on mobile */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  justify-content: center; /* Center cards when they wrap */
+}
+
+.sectioncontainer::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+/* --- NEW/UPDATED CARDS RULES --- */
+.cards {
+    height: 90px;
+    width: 200px;
+    align-items: center; /* Horizontally center content */
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgray;
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Vertically center content */
+    background-color: #ffffff; /* Explicit background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+    padding: 5px; /* Add internal padding */
+    box-sizing: border-box; /* Include padding in height/width */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    margin: 10px; /* Add margin for spacing between cards */
+}
+
+.cards:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- NEW/UPDATED CARD ICON RULES --- */
+#card_icon {
+    font-size: 40px;
+    color: var(--primary-color); /* Apply primary color */
+    margin-bottom: 5px; /* Space between icon and description */
+}
+
+/* --- NEW/UPDATED CARD DESCRIPTION RULES --- */
+.card_description {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #3a3a3a;
+    text-align: center; /* Center text */
+    margin: 0; /* Remove default margins */
+    line-height: 1.2; /* Adjust line height */
+}
+
+/* --- NEW/UPDATED BRAND CONTAINER RULES --- */
+.brandContainer {
+    height: 150px;
+    width: 150px;
+    border-radius: 75px; /* Makes it a circle */
+    justify-content: center;
+    border-width: 0px; /* Your rule */
+    display: flex; /* Make it a flex container */
+    align-items: center; /* Vertically center content */
+    overflow: hidden; /* Hide overflowing parts of the image */
+    background: white; /* Add background */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    padding: 5px; /* Added padding to ensure logo doesn't touch edges */
+    box-sizing: border-box; /* Include padding in the width/height */
+}
+
+.brand-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px; /* Adjust margin for spacing */
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.brand-item:hover {
+    background-color: #e6f0fa; /* Light blue background on hover */
+    transform: translateY(-2px);
+}
+
+/* --- NEW/UPDATED BRAND IMAGE RULES --- */
+.brandImage {
+    height: 145px;
+    width: 145px;
+    border-radius: 75px; /* Keep circular shape */
+    object-fit: contain; /* Ensures entire image is visible, scales down if needed */
+    display: block; /* Removes any extra space below the image */
+    transition: transform 0.3s; /* Keep transition */
+}
+
+.brandImage:hover {
+  transform: scale(1.05); /* Original */
+}
+
+/* --- NEW/UPDATED BRAND NAME RULES --- */
+.brandName {
+    font-family: Verdana;
+    font-size: 15px;
+    color: sienna;
+    margin-left: 45px; /* Your margin rule */
+    margin-top: 10px;
+    text-align: center; /* Ensure text is centered below the circle */
+    transition: color 0.3s ease;
+}
+
+.brand-item:hover .brandName {
+    color: #3f51b5; /* Matches primary heading color on hover */
+}
+
+/* --- NEW/UPDATED INSTANT RELIEF HEADING RULES --- */
+.instantRelief { /* This class is now used for section-heading-secondary */
+    font-family: Helvetica;
+    font-size: 18px;
+    font-weight: 200;
+    margin-bottom: 16px;
+    margin-top: 20px;
+    margin-left: 20px;
+    color: #212121;
+    text-align: left; /* Default alignment */
+    /* Remove previous secondary heading styles if this is the new secondary style */
+}
+/* Keeping the original secondary heading structure to override if needed */
+.section-heading-secondary {
+    font-family: 'Open Sans', sans-serif; /* Clean sans-serif, complements Lora */
+    font-size: 1.8em; /* Smaller than primary, medium size */
+    font-weight: 600; /* Semi-bold */
+    color: #555; /* Soft dark grey */
+    text-align: center;
+    margin-top: 45px;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid #cccccc; /* Very subtle single underline */
+}
+.section-heading-secondary::after {
+    content: '';
+    display: none; /* Removed the secondary line for secondary headings */
+}
+
+
+/* --- NEW/UPDATED INSTANT RELIEF CONTAINER RULES --- */
+.instantReliefContainer {
+    width: 100%;
+    height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #fff; /* Add background for clarity */
+    border-radius: var(--border-radius-lg); /* Apply existing variable */
+    flex-wrap: wrap; /* Allow items to wrap */
+    padding: 1rem; /* Add padding inside */
+    margin: 1.5rem 0; /* Adjust margin */
+    box-sizing: border-box; /* Include padding in height/width */
+}
+
+/* --- NEW/UPDATED MINI CARDS RULES --- */
+.miniCards {
+    height: 320px;
+    width: 100%; /* Fill the column width */
+    border-radius: 15px;
+    align-items: center; /* Horizontally center content */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: space-between; /* Space items out */
+    padding: 1rem;
+    box-sizing: border-box; /* Include padding in dimensions */
+    background: white; /* Ensure background */
+    border: 1px solid #e0e0e0; /* Subtle border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth transitions */
+}
+
+.miniCards:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- NEW/UPDATED MINI CARDS IMAGES RULES --- */
+.miniCardsImages {
+    width: 150px;
+    height: 130px;
+    object-fit: contain; /* Ensure image fits */
+    margin-bottom: 1rem; /* Space below image */
+}
+
+/* --- NEW/UPDATED MINI CARDS DESCRIPTION RULES --- */
+.miniCardsDescription {
+    color: #4b4a48;
+    font-family: Helvetica;
+    font-weight: 200;
+    font-size: 15px;
+    text-align: center; /* Center text */
+    margin: 10px 0; /* Add vertical margin */
+    min-height: 60px; /* Ensure consistent height */
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+    flex-grow: 1; /* Allow description to take available vertical space */
+}
+
+/* --- NEW/UPDATED PRICE SECTION (PARENT) --- */
+.price-section {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center items within price section */
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  flex-wrap: wrap; /* Allow wrapping */
+}
+
+/* --- NEW/UPDATED RUPEE SIGN RULES --- */
+.rupeesign {
+    font-size: 15px;
+    color: var(--primary-color); /* Use primary color for currency symbol */
+}
+
+/* --- NEW/UPDATED PRICE RULES --- */
+.price {
+    font-family: Helvetica;
+    font-size: 18px;
+    font-weight: 200;
+    color: var(--primary-color); /* Apply primary color */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+/* --- NEW/UPDATED MRP RULES --- */
+.mrp {
+    font-family: Helvetica;
+    font-size: 13px;
+    text-decoration: line-through;
+    color: #777; /* Softer gray for strikethrough */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+/* --- NEW/UPDATED DISCOUNT RULES --- */
+.discount {
+    font-family: Helvetica;
+    font-size: 12px;
+    color: #1e8e3e;
+    font-weight: bold;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+/* --- NEW/UPDATED ADD BUTTON RULES --- */
+.addButton {
+    height: 40px;
+    width: 200px;
+    background-color: #165D59;
+    color: azure;
+    border-width: 0px;
+    border-radius: 5px;
+    font-family: Helvetica;
+    border: none; /* Ensure no border */
+    cursor: pointer; /* Indicate clickable */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    margin-top: 10px; /* Add space above button */
+}
+
+.addButton:hover {
+    background-color: #1a504c;
+    transform: translateY(-1px);
+}
+
+/* ===== Responsive Adjustments (Keeping previous responsive rules where they enhance your new base) ===== */
+@media (max-width: 992px) {
+  .navbar-brand .logo-text {
+      font-size: 1.8em; /* Adjust for smaller screens */
+  }
+  .main-logo {
+      height: 60px; /* Adjust logo size for smaller screens */
+  }
+  .section-heading-primary { /* Maintain responsiveness for primary heading */
+      font-size: 1.8em;
+      margin-top: 50px;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+  }
+  .section-heading-primary::after {
+      width: 70px;
+      margin: 5px auto 0;
+  }
+  .section-heading-secondary { /* Maintain responsiveness for secondary heading */
+      font-size: 1.5em;
+      margin-top: 40px;
+      margin-bottom: 25px;
+  }
+  .miniCards {
+      height: 300px;
+  }
+  .miniCardsImages {
+      width: 120px;
+      height: 100px;
+  }
+  .miniCardsDescription {
+      font-size: 0.9em;
+      min-height: 55px;
+      -webkit-line-clamp: 3;
+  }
+  .price {
+      font-size: 1em;
+  }
+  .mrp {
+      font-size: 0.75em;
+  }
+  .discount {
+      font-size: 0.7em;
+  }
+  .addButton {
+      height: 35px;
+      font-size: 0.9em;
+  }
+  .brandContainer {
+      width: 90px;
+      height: 90px;
+  }
+  .brandName {
+      font-size: 1em;
+  }
+  .cards {
+      width: 120px;
+      height: 120px;
+      padding: 10px;
+  }
+  #card_icon {
+      width: 50px;
+      height: 50px;
+  }
+  .card_description {
+      font-size: 0.9em;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    padding: 0.5rem 1rem;
+  }
+  .navbar-brand {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .navbar-brand .logo-text {
+      font-size: 1.5em;
+  }
+  .main-logo {
+      height: 50px;
+  }
+  .search-container {
+    order: 3;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .sectioncontainer {
+    gap: 1rem;
+  }
+  .cards {
+    min-width: 160px;
+  }
+  .section-heading-primary {
+      font-size: 1.6em;
+      margin-top: 40px;
+      margin-bottom: 25px;
+      padding-bottom: 12px;
+  }
+  .section-heading-primary::after {
+      width: 60px;
+      margin: 4px auto 0;
+  }
+  .section-heading-secondary {
+      font-size: 1.3em;
+      margin-top: 35px;
+      margin-bottom: 20px;
+  }
+  .miniCards {
+      height: 280px;
+      border-radius: 10px;
+  }
+  .miniCardsImages {
+      width: 100px;
+      height: 90px;
+  }
+  .miniCardsDescription {
+      font-size: 0.85em;
+      min-height: 50px;
+      -webkit-line-clamp: 3;
+  }
+  .price {
+      font-size: 0.9em;
+  }
+  .mrp {
+      font-size: 0.70em;
+  }
+  .discount {
+      font-size: 0.65em;
+  }
+  .addButton {
+      height: 32px;
+      font-size: 0.85em;
+  }
+  .brandContainer {
+      width: 80px;
+      height: 80px;
+  }
+  .brandName {
+      font-size: 0.9em;
+  }
+  .cards {
+      width: 100px;
+      height: 100px;
+      padding: 8px;
+  }
+  #card_icon {
+      width: 45px;
+      height: 45px;
+  }
+  .card_description {
+      font-size: 0.8em;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-brand .logo-text {
+      font-size: 1.3em;
+  }
+  .main-logo {
+      height: 45px;
+  }
+  .navbar .d-flex.flex-row.justify-content-between {
+      flex-wrap: wrap;
+      justify-content: center !important;
+      gap: 5px;
+  }
+  .downlist {
+      font-size: 0.85rem;
+      padding: 5px 8px;
+  }
+  .section-heading-primary {
+      font-size: 1.4em;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      letter-spacing: 0.02em;
+  }
+  .section-heading-primary::after {
+      width: 50px;
+      margin: 3px auto 0;
+  }
+  .section-heading-secondary {
+      font-size: 1.1em;
+      margin-top: 25px;
+      margin-bottom: 15px;
+  }
+  .miniCards {
+      height: 260px;
+      border-radius: 8px;
+  }
+  .miniCardsImages {
+      width: 80px;
+      height: 70px;
+  }
+  .miniCardsDescription {
+      font-size: 0.8em;
+      min-height: 45px;
+      -webkit-line-clamp: 3;
+  }
+  .price {
+      font-size: 0.85em;
+  }
+  .mrp {
+      font-size: 0.65em;
+  }
+  .discount {
+      font-size: 0.60em;
+  }
+  .addButton {
+      height: 30px;
+      font-size: 0.8em;
+  }
+  .brandContainer {
+      width: 70px;
+      height: 70px;
+  }
+  .brandName {
+      font-size: 0.85em;
+  }
+  .cards {
+      width: 90px;
+      height: 90px;
+      padding: 6px;
+      margin: 8px;
+  }
+  #card_icon {
+      width: 40px;
+      height: 40px;
+  }
+  .card_description {
+      font-size: 0.75em;
+  }
+}

@@ -1,0 +1,277 @@
+/* General Styles */
+:root {
+    --primary-color: #28a745; /* A fresh green, common in health themes */
+    --secondary-color: #007bff; /* A calming blue */
+    --text-color: #333;
+    --light-gray: #f8f9fa;
+    --white: #ffffff;
+    --card-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    background-color: var(--light-gray);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 3em;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.5em;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+}
+
+h3 {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+/* Header/Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(40, 167, 69, 0.8), rgba(0, 123, 255, 0.8)), url('images/hero_bg.jpg') no-repeat center center/cover;
+    color: var(--white);
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.hero-section h1 {
+    font-size: 3.8em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--white); /* Override text-color for white text */
+}
+
+.hero-section p {
+    font-size: 1.5em;
+    opacity: 0.9;
+}
+
+/* Content Area Styling */
+.content-area {
+    padding: 60px 20px;
+}
+
+/* Intro Section */
+.intro-section {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.intro-section p {
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    font-size: 1.2em;
+}
+
+.intro-image {
+    max-width: 600px;
+    margin: 30px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+
+.intro-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* Tips Grid */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.tip-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tip-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tip-card .icon-wrapper {
+    font-size: 3em;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tip-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.tip-card p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Call to Action */
+.call-to-action {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border-radius: 10px;
+    margin-bottom: 60px;
+}
+
+.call-to-action h2 {
+    color: var(--white);
+    font-size: 2.8em;
+}
+
+.call-to-action p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: var(--text-color);
+    color: var(--white);
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9em;
+}
+
+footer .social-links a {
+    color: var(--white);
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+footer .social-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    h3 {
+        font-size: 1.5em;
+    }
+
+    .hero-section {
+        padding: 80px 20px;
+        min-height: 300px;
+    }
+
+    .intro-section p {
+        font-size: 1.1em;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr; /* Stack cards on small screens */
+    }
+
+    .tip-card {
+        padding: 25px;
+    }
+
+    .call-to-action h2 {
+        font-size: 2.2em;
+    }
+
+    .call-to-action p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2em;
+    }
+
+    .hero-section p {
+        font-size: 1.2em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .btn-primary {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .signup-container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .signup-box {
+      border: 1px solid #ccc;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+    body { font-family: Arial, sans-serif; background: #f7f9fc; color: #333; }
+    form { max-width: 400px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    .error { color: red; font-size: 0.9em; margin-top: -8px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <div class="signup-box">
+      <h4 class="text-center mb-3">Create an Account</h4>
+      <form id="signup-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+          <div class="error" id="nameError"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+          <div class="error" id="emailError"></div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" required>
+          <div class="error" id="passwordError"></div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+          <div class="error" id="confirmPasswordError"></div>
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Sign Up</button>
+      </form>
+      <p class="mt-3 text-center">Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNSpayhzItGiJB4llF93ICW_jIgrvgPak",
+      authDomain: "medicine-delivery-130aa.firebaseapp.com",
+      projectId: "medicine-delivery-130aa",
+      storageBucket: "medicine-delivery-130aa.appspot.com",
+      messagingSenderId: "539898474363",
+      appId: "1:539898474363:web:2debf03eb6a2f33e65d7de",
+      measurementId: "G-H3RBF4GRNX"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+
+    const signupForm = document.getElementById('signup-form');
+
+    signupForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      ['nameError', 'emailError', 'passwordError', 'confirmPasswordError'].forEach(id => {
+        document.getElementById(id).textContent = '';
+      });
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      let valid = true;
+
+      if (!name) {
+        document.getElementById('nameError').textContent = 'Name is required';
+        valid = false;
+      }
+      if (!email) {
+        document.getElementById('emailError').textContent = 'Email is required';
+        valid = false;
+      } else if (!validateEmail(email)) {
+        document.getElementById('emailError').textContent = 'Invalid email format';
+        valid = false;
+      }
+      if (!password) {
+        document.getElementById('passwordError').textContent = 'Password is required';
+        valid = false;
+      }
+      if (password !== confirmPassword) {
+        document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, { displayName: name });
+        alert('Sign up successful! Please login.');
+        window.location.href = 'login.html';
+      } catch (error) {
+        document.getElementById('emailError').textContent = error.message;
+      }
+    });
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email.toLowerCase());
+    }
+  </script>
+</body>
+</html>

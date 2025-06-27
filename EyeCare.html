@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Care Products</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/ac42c3b1f7.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="mt-5">
+            <h1 class="instantRelief">Eye Care</h1>
+        </div>
+        <div id="eye-products-display-area" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 justify-content-center mt-3">
+            <p class="w-100 text-center">Loading Eye Care products...</p>
+        </div>
+    </div>
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center">
+        <button type="button" class="back-to-home-btn" onclick="location.href='home.html'">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </button>
+    </div>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, orderBy, query, limit } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNSpayhzItGiJB4llF93ICW_jIgrvgPak",
+            authDomain: "medicine-delivery-130aa.firebaseapp.com",
+            projectId: "medicine-delivery-130aa",
+            storageBucket: "medicine-delivery-130aa.firebasestorage.app",
+            messagingSenderId: "539898474363",
+            appId: "1:539898474363:web:2debf03eb6a2f33e65d7de",
+            measurementId: "G-H3RBF4GRNX"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const eyeProductsDisplayArea = document.getElementById('eye-products-display-area');
+
+        async function fetchAndDisplayEyeProducts() {
+            try {
+                const eyeCollectionRef = collection(db, "eye"); // <<-- COLLECTION NAME
+                const q = query(eyeCollectionRef, orderBy("name"), limit(10)); // LIMIT to 10
+                const querySnapshot = await getDocs(q);
+
+                eyeProductsDisplayArea.innerHTML = '';
+                if (querySnapshot.empty) {
+                    eyeProductsDisplayArea.innerHTML = '<p class="w-100 text-center">No Eye Care products found at the moment.</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    const productId = doc.id;
+                    const sellingPrice = product.price || 0;
+                    const mrp = product.mrp || (sellingPrice / 0.9).toFixed(2);
+                    const discount = product.discount || '10%';
+
+                    const colWrapper = document.createElement('div');
+                    colWrapper.className = 'col mb-4';
+                    const productCard = document.createElement('div');
+                    productCard.className = 'miniCards d-flex flex-column h-100';
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" class="miniCardsImages mt-2">
+                        <p class="miniCardsDescription mt-3 ml-4">${product.name}</p>
+                        <div class="mt-2">
+                            <p class="price">
+                                <i class="fa-solid fa-indian-rupee-sign rupeesign"></i>${sellingPrice.toFixed(2)}
+                                <span class="mrp ml-2">MRP ${mrp}</span>
+                                <span class="discount ml-2">${discount} off</span>
+                            </p>
+                        </div>
+                        <button class="addButton"
+                                data-product-id="${productId}"
+                                data-product-name="${product.name}"
+                                data-product-price="${sellingPrice}">ADD</button>
+                    `;
+                    colWrapper.appendChild(productCard);
+                    eyeProductsDisplayArea.appendChild(colWrapper);
+                });
+                applyDynamicScripts();
+            } catch (error) {
+                console.error("Error fetching Eye Care products:", error);
+                eyeProductsDisplayArea.innerHTML = '<p class="w-100 text-center">Failed to load Eye Care products. Please try again later.</p>';
+            }
+        }
+
+        function applyDynamicScripts() {
+            function wrapText(text, maxWords) {
+                const words = text.trim().split(" ");
+                if (words.length <= maxWords) return text;
+                return words.slice(0, maxWords).join(" ") + "...";
+            }
+            document.querySelectorAll('.miniCardsDescription').forEach(el => {
+                el.innerText = wrapText(el.innerText, 10);
+            });
+            document.querySelectorAll('.addButton').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const productId = e.target.dataset.productId;
+                    const name = e.target.dataset.productName;
+                    const price = parseFloat(e.target.dataset.productPrice);
+                    if (!name || isNaN(price)) { console.error('Product details missing.'); return alert('Product details missing. Cannot add to cart.'); }
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    cart.push({ id: productId, name, price });
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    alert(`${name} added to cart.`);
+                });
+            });
+        }
+        document.addEventListener('DOMContentLoaded', fetchAndDisplayEyeProducts);
+    </script>
+</body>
+</html>
