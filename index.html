@@ -3,15 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="final.css">
     <title>AarogyaNow - Your Ayurvedic Health Partner</title>
-    <link rel="stylesheet" href="final.css"> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
     <script src="https://kit.fontawesome.com/ac42c3b1f7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Open+Sans:wght@300;400;600&family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
+    <style>
+        /* Essential styles for html and body to ensure footer can stick to the bottom */
+        html, body {
+            height: 100%; /* Make html and body take full viewport height */
+            margin: 0;   /* Remove default body margin */
+            display: flex; /* Enable flexbox for vertical layout */
+            flex-direction: column; /* Stack items vertically */
+        }
+
+        /* This div needs to grow and push the footer down.
+           Ensure your main content is wrapped inside a div with this ID. */
+        #mainPageContent {
+            flex: 1; /* Allows this div to take up all available space */
+            padding-bottom: 60px; /* Add padding to prevent content from being hidden by the fixed footer */
+            /* Add any other general styles for your main content area here if needed */
+        }
+
+        /* --- Beautiful Footer Design --- */
+        footer {
+            background-color: #2c3e50; /* Deep Slate Blue */
+            color: #ecf0f1; /* Off-White for text */
+            padding: 30px 20px; /* More padding for a spacious feel */
+            text-align: center;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2); /* Stronger, more elegant shadow */
+            margin-top: auto; /* Pushes the footer to the bottom when content is short */
+            position:bottom; /* Makes it stick to the bottom of the viewport */
+            bottom: 0; /* Aligns it to the very bottom */
+            width: 100%; /* Ensures it stretches across the full width */
+            z-index: 1000; /* Keeps it on top of other elements */
+            border-top: 5px solid #3498db;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer p {
+            margin-bottom: 15px; /* More space below copyright */
+            font-size: 1em; /* Slightly larger font */
+            font-weight:600; /* Lighter font weight */
+        }
+
+        .social-links {
+            margin-top: 15px; /* More space above social icons */
+        }
+
+        .social-links a {
+            color: #ecf0f1; /* Off-White for icons */
+            font-size: 1.8em; /* Larger icons */
+            margin: 0 15px; /* More space between icons */
+            transition: color 0.3s ease, transform 0.2s ease-in-out; /* Smooth transition for hover effects */
+        }
+
+        .social-links a:hover {
+            color: #3498db; /* Bright Blue on hover */
+            transform: translateY(-3px); /* Subtle lift effect on hover */
+            text-decoration: none; /* Remove underline on hover */
+        }
+
+        /* Media Queries for footer responsiveness */
+        @media (max-width: 768px) {
+            footer {
+                padding: 20px 10px;
+            }
+            footer p {
+                font-size: 0.9em;
+            }
+            .social-links a {
+                font-size: 1.5em;
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            footer {
+                padding: 15px 5px;
+            }
+            footer p {
+                font-size: 0.8em;
+            }
+            .social-links a {
+                font-size: 1.3em;
+                margin: 0 8px;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -202,7 +289,7 @@
         </div>
 
         <div class="container-fluid px-4 mt-5">
-            <h1 class="section-heading-secondary">Instant Relief</h1> 
+            <h1 class="section-heading-secondary">Instant Relief</h1>
             <div id="instantReliefProductsContainer" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 justify-content-center mt-3">
                 <p class="w-100 text-center">Loading Instant Relief products...</p>
             </div>
@@ -228,11 +315,12 @@
                 <p class="w-100 text-center">Loading Pain Relief products...</p>
             </div>
         </div>
-    </div> 
+    </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Arogya Now. All rights reserved.</p>
+            <p>&copy; 2025 AarogyaNow. All rights reserved.</p>
+            <p>For queries, contact: +91 9700555736</p>
             <div class="social-links">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -268,14 +356,14 @@
         const loginTextElement = document.getElementById('loginText');
         const logoutSection = document.getElementById('logoutSection');
         const logoutBtn = document.getElementById('logoutBtn');
-        const mainPageContent = document.getElementById('mainPageContent'); 
+        const mainPageContent = document.getElementById('mainPageContent');
 
         // --- Authentication Check and Redirection Logic ---
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUserId = user.uid;
                 console.log("User logged in:", user.email, user.uid);
-                
+
                 if (mainPageContent) {
                     mainPageContent.style.display = 'block';
                 }
@@ -287,7 +375,7 @@
                 if (logoutSection) {
                     logoutSection.style.display = 'block';
                 }
-                
+
                 loadHomeProducts();
 
             } else {
@@ -335,11 +423,11 @@
         async function addToCartFirestore(product) {
             if (!currentUserId) {
                 alert("Please log in to add items to your cart.");
-                window.location.href = 'login.html'; 
+                window.location.href = 'login.html';
                 return;
             }
 
-            const cartRef = doc(db, "carts", currentUserId); 
+            const cartRef = doc(db, "carts", currentUserId);
             try {
                 const cartSnap = await getDoc(cartRef);
                 let cartItems = [];
@@ -360,8 +448,8 @@
 
                 await setDoc(cartRef, {
                     items: cartItems,
-                    updatedAt: serverTimestamp() 
-                }, { merge: true }); 
+                    updatedAt: serverTimestamp()
+                }, { merge: true });
 
                 alert(`${product.name} added to cart!`);
                 console.log("Cart updated in Firestore.");
@@ -375,9 +463,9 @@
         // --- Modified Firebase Product Loading Function for Consistency ---
         async function loadProducts(containerId, collectionName, limitCount = 5) {
             const container = document.getElementById(containerId);
-            if (!container) return; 
+            if (!container) return;
 
-            container.innerHTML = '<p class="w-100 text-center">Loading products...</p>'; 
+            container.innerHTML = '<p class="w-100 text-center">Loading products...</p>';
 
             try {
                 const productsCol = collection(db, collectionName);
@@ -396,9 +484,9 @@
                 container.innerHTML = ''; // Clear loading message
 
                 productList.forEach(product => {
-                    const sellingPrice = parseFloat(product.price) || 0; 
-                    const mrp = parseFloat(product.mrp); 
-                    let discount = product.discount; 
+                    const sellingPrice = parseFloat(product.price) || 0;
+                    const mrp = parseFloat(product.mrp);
+                    let discount = product.discount;
 
                     let displayDiscount = '';
                     if (typeof discount === 'string' && discount.trim() !== '') {
@@ -406,9 +494,9 @@
                         if (discount.toLowerCase() === '0%' || discount === '0') {
                             displayDiscount = '0% off';
                         } else if (discount.toLowerCase().includes('off') || discount.endsWith('%')) {
-                            displayDiscount = discount; 
+                            displayDiscount = discount;
                         } else {
-                            displayDiscount = `${discount} off`; 
+                            displayDiscount = `${discount} off`;
                         }
                     } else if (typeof discount === 'number') {
                         if (discount === 0) {
@@ -459,7 +547,7 @@
                             price: productPrice,
                             image: productImage,
                             mrp: productMrp,
-                            discount: productDiscount 
+                            discount: productDiscount
                         };
                         await addToCartFirestore(productData);
                     });
@@ -473,7 +561,7 @@
 
         async function loadHomeProducts() {
             await loadProducts('instantReliefProductsContainer', 'instantrelief', 5);
-            await loadProducts('ayurvedaProductsContainer', 'ayurveda', 5); 
+            await loadProducts('ayurvedaProductsContainer', 'ayurveda', 5);
             await loadProducts('skinProductsContainer', 'skin', 5);
             await loadProducts('painReliefProductsContainer', 'painrelief', 5);
         }
