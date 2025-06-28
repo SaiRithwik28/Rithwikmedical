@@ -529,7 +529,7 @@
             const currentTotal = parseFloat(totalElement.innerText.replace('Total Amount: ₹', ''));
             const qrData = `Total Amount: ₹${currentTotal.toFixed(2)}`;
 
-            qrCodeImage.src = `https://res.cloudinary.com/dzbhjxppo/image/upload/v1751004796/qr_jnqyde.jpg`;
+            qrCodeImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(qrData)}`;
             qrPaymentAmount.innerText = `Total: ₹${currentTotal.toFixed(2)}`;
             qrModal.style.display = "flex";
         });
