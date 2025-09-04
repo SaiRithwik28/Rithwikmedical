@@ -1,203 +1,205 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oral Care Products</title>
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/ac42c3b1f7.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oral Care Products</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/ac42c3b1f7.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="mt-5">
-            <h1 class="instantRelief">Oral Care</h1>
-        </div>
-        <div id="oral-products-display-area" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 justify-content-center mt-3">
-            <p class="w-100 text-center">Loading Oral Care products...</p>
-        </div>
-    </div>
-    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center">
-        <button type="button" class="back-to-home-btn" onclick="location.href='index.html'">
-            <i class="fas fa-arrow-left"></i> Back to Home
-        </button>
-    </div>
-    <script type="module">
-        // Import Firebase modules
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-        import { getFirestore, collection, getDocs, orderBy, query, limit, doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    <div class="container-fluid">
+        <div class="mt-5">
+            <h1 class="instantRelief">Oral Care</h1>
+        </div>
+        <div id="oral-products-display-area" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 justify-content-center mt-3">
+            <p class="w-100 text-center">Loading Oral Care products...</p>
+        </div>
+    </div>
+    <div class="container-fluid mt-5 mb-5 d-flex justify-content-center">
+        <button type="button" class="back-to-home-btn" onclick="location.href='index.html'">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </button>
+    </div>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, orderBy, query, limit, doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-        // Your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBNSpayhzItGiJB4llF93ICW_jIgrvgPak",
-            authDomain: "medicine-delivery-130aa.firebaseapp.com",
-            projectId: "medicine-delivery-130aa",
-            storageBucket: "medicine-delivery-130aa.firebasestorage.app",
-            messagingSenderId: "539898474363",
-            appId: "1:539898474363:web:2debf03eb6a2f33e65d7de",
-            measurementId: "G-H3RBF4GRNX"
-        };
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNSpayhzItGiJB4llF93ICW_jIgrvgPak",
+            authDomain: "medicine-delivery-130aa.firebaseapp.com",
+            projectId: "medicine-delivery-130aa",
+            storageBucket: "medicine-delivery-130aa.firebasestorage.app",
+            messagingSenderId: "539898474363",
+            appId: "1:539898474363:web:2debf03eb6a2f33e65d7de",
+            measurementId: "G-H3RBF4GRNX"
+        };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const oralProductsDisplayArea = document.getElementById('oral-products-display-area');
-        let currentUserId = null;
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const oralProductsDisplayArea = document.getElementById('oral-products-display-area');
+        let currentUserId = null;
 
-        // Listen for auth state changes to get the user ID
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUserId = user.uid;
-                console.log("User logged in on Oral Care page:", user.email, currentUserId);
-            } else {
-                currentUserId = null;
-                console.log("No user logged in on Oral Care page.");
-            }
-        });
+        // Listen for auth state changes to get the user ID
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                console.log("User logged in on Oral Care page:", user.email, currentUserId);
+            } else {
+                currentUserId = null;
+                console.log("No user logged in on Oral Care page.");
+            }
+        });
 
-        async function fetchAndDisplayOralProducts() {
-            try {
-                const oralCollectionRef = collection(db, "oral");
-                const q = query(oralCollectionRef, orderBy("name"), limit(10));
-                const querySnapshot = await getDocs(q);
-                oralProductsDisplayArea.innerHTML = '';
-                if (querySnapshot.empty) {
-                    oralProductsDisplayArea.innerHTML = '<p class="w-100 text-center">No Oral Care products found at the moment.</p>';
-                    return;
-                }
-                querySnapshot.forEach((doc) => {
-                    const product = doc.data();
-                    const productId = doc.id;
-                    const sellingPrice = parseFloat(product.price) || 0;
-                    const mrp = parseFloat(product.mrp);
-                    let discount = product.discount;
+        async function fetchAndDisplayOralProducts() {
+            try {
+                const oralCollectionRef = collection(db, "oral");
+                const q = query(oralCollectionRef, orderBy("name"), limit(10));
+                const querySnapshot = await getDocs(q);
+                oralProductsDisplayArea.innerHTML = '';
+                if (querySnapshot.empty) {
+                    oralProductsDisplayArea.innerHTML = '<p class="w-100 text-center">No Oral Care products found at the moment.</p>';
+                    return;
+                }
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    const productId = doc.id;
+                    const sellingPrice = parseFloat(product.price) || 0;
+                    const mrp = parseFloat(product.mrp);
+                    let discount = product.discount;
 
-                    let displayDiscount = '';
-                    if (typeof discount === 'string' && discount.trim() !== '') {
-                        discount = discount.trim();
-                        if (discount.toLowerCase() === '0%' || discount === '0') {
-                            displayDiscount = '0% off';
-                        } else if (discount.toLowerCase().includes('off') || discount.endsWith('%')) {
-                            displayDiscount = discount;
-                        } else {
-                            displayDiscount = `${discount} off`;
-                        }
-                    } else if (typeof discount === 'number') {
-                        if (discount === 0) {
-                            displayDiscount = '0% off';
-                        } else if (discount > 0) {
-                            displayDiscount = `${discount}% off`;
-                        }
-                    }
+                    let displayDiscount = '';
+                    if (typeof discount === 'string' && discount.trim() !== '') {
+                        discount = discount.trim();
+                        if (discount.toLowerCase() === '0%' || discount === '0') {
+                            displayDiscount = '0% off';
+                        } else if (discount.toLowerCase().includes('off') || discount.endsWith('%')) {
+                            displayDiscount = discount;
+                        } else {
+                            displayDiscount = `${discount} off`;
+                        }
+                    } else if (typeof discount === 'number') {
+                        if (discount === 0) {
+                            displayDiscount = '0% off';
+                        } else if (discount > 0) {
+                            displayDiscount = `${discount}% off`;
+                        }
+                    }
 
-                    const colWrapper = document.createElement('div');
-                    colWrapper.className = 'col mb-4';
-                    const productCard = document.createElement('div');
-                    productCard.className = 'miniCards d-flex flex-column h-100';
-                    productCard.innerHTML = `
-                        <img src="${product.image || 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=No+Image'}" alt="${product.name}" class="miniCardsImages mt-2">
-                        <p class="miniCardsDescription mt-3 ml-4">${product.name}</p>
-                        <div class="mt-2">
-                            <p class="price">
-                                <i class="fa-solid fa-indian-rupee-sign rupeesign"></i>${sellingPrice.toFixed(2)}
-                                ${!isNaN(mrp) && mrp > 0 ? `<span class="mrp ml-2">MRP <i class="fa-solid fa-indian-rupee-sign"></i>${mrp.toFixed(2)}</span>` : ''}
-                                ${displayDiscount ? `<span class="discount ml-2">${displayDiscount}</span>` : ''}
-                            </p>
-                        </div>
-                        <button class="addButton"
-                                data-product-id="${productId}"
-                                data-product-name="${product.name}"
-                                data-product-price="${sellingPrice}"
-                                data-product-image="${product.image || 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=No+Image'}"
-                                data-product-mrp="${!isNaN(mrp) && mrp > 0 ? mrp : ''}"
-                                data-product-discount="${product.discount || ''}">ADD</button>
-                    `;
-                    colWrapper.appendChild(productCard);
-                    oralProductsDisplayArea.appendChild(colWrapper);
-                });
-                applyDynamicScripts();
-            } catch (error) {
-                console.error("Error fetching Oral Care products:", error);
-                oralProductsDisplayArea.innerHTML = '<p class="w-100 text-center text-danger">Failed to load Oral Care products. Please check your internet connection and Firebase security rules.</p>';
-            }
-        }
+                    const colWrapper = document.createElement('div');
+                    colWrapper.className = 'col mb-4';
+                    const productCard = document.createElement('div');
+                    productCard.className = 'miniCards d-flex flex-column h-100';
+                    productCard.innerHTML = `
+                        <img src="${product.image || 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=No+Image'}" alt="${product.name}" class="miniCardsImages mt-2">
+                        <p class="miniCardsDescription mt-3 ml-4">${product.name}</p>
+                        <div class="mt-2">
+                            <p class="price">
+                                <i class="fa-solid fa-indian-rupee-sign rupeesign"></i>${sellingPrice.toFixed(2)}
+                                ${!isNaN(mrp) && mrp > 0 ? `<span class="mrp ml-2">MRP <i class="fa-solid fa-indian-rupee-sign"></i>${mrp.toFixed(2)}</span>` : ''}
+                                ${displayDiscount ? `<span class="discount ml-2">${displayDiscount}</span>` : ''}
+                            </p>
+                        </div>
+                        <button class="addButton"
+                                data-product-id="${productId}"
+                                data-product-name="${product.name}"
+                                data-product-price="${sellingPrice}"
+                                data-product-image="${product.image || 'https://via.placeholder.com/150/CCCCCC/FFFFFF?text=No+Image'}"
+                                data-product-mrp="${!isNaN(mrp) && mrp > 0 ? mrp : ''}"
+                                data-product-discount="${product.discount || ''}">ADD</button>
+                    `;
+                    colWrapper.appendChild(productCard);
+                    oralProductsDisplayArea.appendChild(colWrapper);
+                });
+                applyDynamicScripts();
+            } catch (error) {
+                console.error("Error fetching Oral Care products:", error);
+                oralProductsDisplayArea.innerHTML = '<p class="w-100 text-center text-danger">Failed to load Oral Care products. Please check your internet connection and Firebase security rules.</p>';
+            }
+        }
 
-        function applyDynamicScripts() {
-            function wrapText(text, maxWords) {
-                const words = text.trim().split(" ");
-                if (words.length <= maxWords) return text;
-                return words.slice(0, maxWords).join(" ") + "...";
-            }
-            document.querySelectorAll('.miniCardsDescription').forEach(el => {
-                el.innerText = wrapText(el.innerText, 10);
-            });
-            document.querySelectorAll('.addButton').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    const productId = e.target.dataset.productId;
-                    const name = e.target.dataset.productName;
-                    const price = parseFloat(e.target.dataset.productPrice);
-                    const image = e.target.dataset.productImage;
-                    const mrp = parseFloat(e.target.dataset.productMrp);
-                    const discount = e.target.dataset.productDiscount;
+        function applyDynamicScripts() {
+            function wrapText(text, maxWords) {
+                const words = text.trim().split(" ");
+                if (words.length <= maxWords) return text;
+                return words.slice(0, maxWords).join(" ") + "...";
+            }
+            document.querySelectorAll('.miniCardsDescription').forEach(el => {
+                el.innerText = wrapText(el.innerText, 10);
+            });
+            document.querySelectorAll('.addButton').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const productId = e.target.dataset.productId;
+                    const name = e.target.dataset.productName;
+                    const price = parseFloat(e.target.dataset.productPrice);
+                    const image = e.target.dataset.productImage;
+                    const mrp = parseFloat(e.target.dataset.productMrp);
+                    const discount = e.target.dataset.productDiscount;
 
-                    if (!productId || !name || isNaN(price) || !image) {
-                        console.error('Missing product details:', { productId, name, price, image });
-                        return alert('Product details incomplete. Cannot add to cart.');
-                    }
+                    if (!productId || !name || isNaN(price) || !image) {
+                        console.error('Missing product details:', { productId, name, price, image });
+                        return alert('Product details incomplete. Cannot add to cart.');
+                    }
 
-                    const productData = {
-                        id: productId,
-                        name: name,
-                        price: price,
-                        image: image,
-                        mrp: mrp,
-                        discount: discount,
-                    };
+                    const productData = {
+                        id: productId,
+                        name: name,
+                        price: price,
+                        image: image,
+                        mrp: mrp,
+                        discount: discount,
+                    };
 
-                    await addToCartFirestore(productData);
-                });
-            });
-        }
+                    await addToCartFirestore(productData);
+                });
+            });
+        }
 
-        async function addToCartFirestore(product) {
-            if (!currentUserId) {
-                alert("Please log in to add items to your cart.");
-                window.location.href = 'login.html';
-                return;
-            }
-            const cartRef = doc(db, "carts", currentUserId);
-            try {
-                const cartSnap = await getDoc(cartRef);
-                let cartItems = [];
-                if (cartSnap.exists()) {
-                    cartItems = cartSnap.data().items || [];
-                }
-                const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
-                if (existingItemIndex > -1) {
-                    cartItems[existingItemIndex].quantity = (cartItems[existingItemIndex].quantity || 1) + 1;
-                    console.log(`Incremented quantity for ${product.name}. New quantity: ${cartItems[existingItemIndex].quantity}`);
-                } else {
-                    cartItems.push({ ...product, quantity: 1 });
-                    console.log(`Added ${product.name} to cart.`);
-                }
-                await setDoc(cartRef, {
-                    items: cartItems,
-                    updatedAt: serverTimestamp()
-                }, { merge: true });
-                alert(`${product.name} added to cart!`);
-                console.log("Cart updated in Firestore.");
-            } catch (error) {
-                console.error("Error adding to cart (Firestore operation failed):", error);
-                alert("Failed to add item to cart. Please check console for details and ensure you are logged in and have correct Firebase security rules.");
-            }
-        }
-        document.addEventListener('DOMContentLoaded', fetchAndDisplayOralProducts);
-    </script>
+        async function addToCartFirestore(product) {
+            if (!currentUserId) {
+                alert("Please log in to add items to your cart.");
+                window.location.href = 'login.html';
+                return;
+            }
+            const cartRef = doc(db, "carts", currentUserId);
+            try {
+                const cartSnap = await getDoc(cartRef);
+                let cartItems = [];
+                if (cartSnap.exists()) {
+                    cartItems = cartSnap.data().items || [];
+                }
+                const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
+                if (existingItemIndex > -1) {
+                    cartItems[existingItemIndex].quantity = (cartItems[existingItemIndex].quantity || 1) + 1;
+                    console.log(`Incremented quantity for ${product.name}. New quantity: ${cartItems[existingItemIndex].quantity}`);
+                } else {
+                    cartItems.push({ ...product, quantity: 1 });
+                    console.log(`Added ${product.name} to cart.`);
+                }
+                await setDoc(cartRef, {
+                    items: cartItems,
+                    updatedAt: serverTimestamp()
+                }, { merge: true });
+                alert(`${product.name} added to cart!`);
+                console.log("Cart updated in Firestore.");
+            } catch (error) {
+                console.error("Error adding to cart (Firestore operation failed):", error);
+                alert("Failed to add item to cart. Please check console for details and ensure you are logged in and have correct Firebase security rules.");
+            }
+        }
+        document.addEventListener('DOMContentLoaded', fetchAndDisplayOralProducts);
+    </script>
 </body>
 </html>
+
+
