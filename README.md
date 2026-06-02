@@ -18,7 +18,8 @@ A web-based medicine delivery platform designed to provide users with a convenie
 
 ## 📸 Screenshots
 
-> _Add screenshots of your homepage, product page, and cart here_
+<img width="1920" height="925" alt="Screenshot (6)" src="https://github.com/user-attachments/assets/b6cae6a6-25e3-4511-bfdf-0f7b92f119ba" />
+<img width="1920" height="922" alt="Screenshot (7)" src="https://github.com/user-attachments/assets/f63e0cea-4ca1-4493-b726-7cb3fb177f1a" />
 
 ---
 
