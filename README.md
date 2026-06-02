@@ -12,7 +12,7 @@ A web-based medicine delivery platform designed to provide users with a convenie
 
 ## 🌐 Live Demo
 
-🔗 [View Live Site](https://SaiRithwik28.github.io/Rithwikmedical/)
+🔗 [View Live Site](https://SaiRithwik28.github.io/Medicine-delivery-website/)
 
 ---
 
@@ -76,8 +76,8 @@ A web-based medicine delivery platform designed to provide users with a convenie
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/SaiRithwik28/Rithwikmedical.git
-cd Rithwikmedical
+git clone https://github.com/SaiRithwik28/Medicine-delivery-website.git
+cd Medicine-delivery-website
 ```
 
 ### 2. Open in browser
